@@ -1,25 +1,44 @@
-$(document).ready(function () {
-  let checkedAmenities = {};
-
-  $('input[type="checkbox"]').change(function () {
-    if (this.checked) {
-      checkedAmenities[$(this).data('id')] = $(this).data('name');
-    } else {
-      delete checkedAmenities[$(this).data('id')];
+$(document).ready(() => {
+  let amenities = {};
+  $('input[type="checkbox"]').change(() => {
+    let checkBoxs = $('input[type = "checkbox"]')
+    for (let i = 0; i < checkBoxs.length; i++) {
+      let key = $(checkBoxs[i]).attr('data-id');
+      if ($(checkBoxs[i]).prop('checked')) {
+        if (!(key in amenities)) {
+          amenities[key] = $(checkBoxs[i]).attr('data-name');
+        }
+      } else {
+        if (key in amenities) {
+          delete amenities[key];
+        }
+      }
     }
-
-    let amenityNames = Object.values(checkedAmenities);
-    $('div.amenities > h4').text(amenityNames.edy(function () {
-  let checkedAmenities = {};
-
-  $('input[type="checkbox"]').change(function () {
-    if (this.checked) {
-      checkedAmenities[$(this).data('id')] = $(this).data('name');
-    } else {
-      delete checkedAmenities[$(this).data('id')];
+    let amenText = $(".amenities h4");
+    amenText.css("text-overflow", "ellipsis");
+    amenText.css("white-space", "nowrap");
+    amenText.html("&nbsp;");
+    initWidth = amenText.width();
+    let i = 0, b = 0;
+    for (let key in amenities) {
+      if ($(".amenities h4").width() > initWidth) {
+        amenText.append('...');
+        break;
+      }
+      if (i >= 1) {
+        amenText.append(", ");
+      }
+      amen = amenities[key]
+      for (let j = 0; j < amen.length; j++) {
+        if ($(".amenities h4").width() > initWidth) {
+          amenText.append('...');
+          b = 1;
+          break;
+        }
+        amenText.append(amen[j]);
+      }
+      if (b) { break; }
+      i++;
     }
-
-    let amenityNames = Object.values(checkedAmenities);
-    $('div.amenities > h4').text(amenityNames.join(', '));
-  });
-});
+  })
+})
