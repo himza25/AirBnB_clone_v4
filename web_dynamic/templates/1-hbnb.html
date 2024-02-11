@@ -43,11 +43,7 @@
             <ul>
               {% for amenity in amenities %}
               <li>
-        	<li><input type="checkbox" data-id="1" data-name="WiFi"> WiFi</li>
-      		<li><input type="checkbox" data-id="2" data-name="Parking"> Parking</li>
-      		<li><input type="checkbox" data-id="3" data-name="Swimming Pool"> Swimming Pool</li>
-      		<li><input type="checkbox" data-id="4" data-name="Air Conditioning"> Air Conditioning</li>
-      		<li><input type="checkbox" data-id="5" data-name="Breakfast"> Breakfast</li>              
+                <input type="checkbox" data-id="{{ amenity.id }}" data-name="{{ amenity.name }}"> {{ amenity.name }}
               </li>
               {% endfor %}
             </ul>
