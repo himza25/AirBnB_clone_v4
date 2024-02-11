@@ -1,14 +1,13 @@
-$(document).ready(init);
-
-function init () {
-  const amenityObj = {};
-  $('.amenities .popover input').change(function () {
-    if ($(this).is(':checked')) {
-      amenityObj[$(this).attr('data-name')] = $(this).attr('data-id');
-    } else if ($(this).is(':not(:checked)')) {
-      delete amenityObj[$(this).attr('data-name')];
-    }
-    const names = Object.keys(amenityObj);
-    $('.amenities h4').text(names.sort().join(', '));
-  });
-}
+<div class="amenities">
+    <h3>Amenities</h3>
+    <h4>&nbsp;</h4>
+    <div class="popover">
+        <ul>
+            {% for amenity in amenities %}
+            <li>
+                <input type="checkbox" data-id="{{ amenity.id }}" data-name="{{ amenity.name }}"> {{ amenity.name }}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
